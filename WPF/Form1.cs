@@ -188,7 +188,7 @@ namespace WPF
                     case 0:
                         //Minus
                         newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1));
-                        selectNumber = temp;
+                        temp = selectNumber - newSelectNumber;
                         this.textBox1.Text = Convert.ToString(temp);
                         break;
                     case 1:
