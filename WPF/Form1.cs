@@ -190,25 +190,25 @@ namespace WPF
                         //Minus
                         newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1));
                         temp = selectNumber - newSelectNumber;
-                        this.textBox1.Text = Convert.ToString(temp);
+                        this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
                         break;
                     case 1:
                         //Divide
                         newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('/') + 1));
                         temp = selectNumber / newSelectNumber;
-                        this.textBox1.Text = Convert.ToString(temp);
+                        this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
                         break;
                     case 2:
                         //Plus
                         newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('+') + 1));
                         temp = selectNumber + newSelectNumber;
-                        this.textBox1.Text = Convert.ToString(temp);
+                        this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
                         break;
                     case 3:
                         //Multi
                         newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('x') + 1));
                         temp = selectNumber * newSelectNumber;
-                        this.textBox1.Text = Convert.ToString(temp);
+                        this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
                         break;
                 }
                 selectNumber = temp;
