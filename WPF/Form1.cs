@@ -9,6 +9,7 @@ namespace WPF
         private bool waitingNewNumber = false;
         private bool checkZero = false;
         private bool errored = false;
+        private bool doingDecimals = false;
         private int selectOperation;
 
 
@@ -224,6 +225,7 @@ namespace WPF
             this.textBox1.Text = "";
             waitingNewNumber = false;
             checkZero = false;
+            doingDecimals = false;
             if (errored)
             {
                 this.label2.Visible = false;
@@ -238,6 +240,7 @@ namespace WPF
                 this.selectNumber = Convert.ToDouble(this.textBox1.Text);
                 this.textBox1.Text += "-";
                 waitingNewNumber = true;
+                checkZero=false;
                 selectOperation = 0;
             }
             else
@@ -253,6 +256,7 @@ namespace WPF
                 this.selectNumber = Convert.ToDouble(this.textBox1.Text);
                 this.textBox1.Text += "/";
                 waitingNewNumber = true;
+                checkZero=false;
                 selectOperation = 1;
             }
             else
@@ -269,6 +273,7 @@ namespace WPF
                 this.selectNumber = Convert.ToDouble(this.textBox1.Text);
                 this.textBox1.Text += "+";
                 waitingNewNumber = true;
+                checkZero=false;
                 selectOperation = 2;
             }
             else
@@ -284,6 +289,7 @@ namespace WPF
                 this.selectNumber = Convert.ToDouble(this.textBox1.Text);
                 this.textBox1.Text += "x";
                 waitingNewNumber = true;
+                checkZero = false;
                 selectOperation = 3;
             }
             else
@@ -295,15 +301,70 @@ namespace WPF
 
         private void btnDecimal_Click(object sender, EventArgs e)
         {
-            this.textBox1.Text += ',';
-            if (!waitingNewNumber)
+            string tempOperation = string.Empty;
+            if (!doingDecimals)
             {
-                var temp = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf(',') + 1);
-                double tempL = temp.Length;
-                for(int i=0; i < tempL; i++)
+                if (!waitingNewNumber)
                 {
-                    selectNumber += temp[i] * Math.Pow(10, i--);
+                    this.textBox1.Text += ',';
+                    doingDecimals = true;
+                    var temp = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf(',') + 1);
+                    double tempL = temp.Length;
+                    for (int i = 0; i < tempL; i++)
+                    {
+                        selectNumber += temp[i] * Math.Pow(10, i--);
+                    }
                 }
+                else
+                {
+                    string newOP1;
+                    string newOP2;
+                    double tempL = 0;
+                    switch (selectOperation)
+                    {
+                        case 0:
+                            newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1); //TEMP
+                            newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
+                            tempL = newOP2.Length;
+                            for (int i = 0; i < tempL; i++)
+                            {
+                                selectNumber += newOP2[i] * Math.Pow(10, i--);
+                            }
+                            break;
+                        case 1:
+                            newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('/') + 1); //TEMP
+                            newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
+                            tempL = newOP2.Length;
+                            for (int i = 0; i < tempL; i++)
+                            {
+                                selectNumber += newOP2[i] * Math.Pow(10, i--);
+                            }
+                            break;
+                        case 2:
+                            newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('+') + 1); //TEMP
+                            newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
+                            tempL = newOP2.Length;
+                            for (int i = 0; i < tempL; i++)
+                            {
+                                selectNumber += newOP2[i] * Math.Pow(10, i--);
+                            }
+                            break;
+                        case 3:
+                            newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1); //TEMP
+                            newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
+                            tempL = newOP2.Length;
+                            for (int i = 0; i < tempL; i++)
+                            {
+                                selectNumber += newOP2[i] * Math.Pow(10, i--);
+                            }
+                            break;
+                    }
+                }
+            }
+            else 
+            {
+                this.label2.Visible = true;
+                errored = true;
             }
         }
     }
