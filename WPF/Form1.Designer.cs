@@ -117,6 +117,7 @@
             btnPlus.TabIndex = 6;
             btnPlus.Text = "+";
             btnPlus.UseVisualStyleBackColor = true;
+            btnPlus.Click += btnSum_Click;
             // 
             // btnMulti
             // 
