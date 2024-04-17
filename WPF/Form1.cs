@@ -295,7 +295,16 @@ namespace WPF
 
         private void btnDecimal_Click(object sender, EventArgs e)
         {
-
+            this.textBox1.Text += ',';
+            if (!waitingNewNumber)
+            {
+                var temp = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf(',') + 1);
+                double tempL = temp.Length;
+                for(int i=0; i < tempL; i++)
+                {
+                    selectNumber += temp[i] * Math.Pow(10, i--);
+                }
+            }
         }
     }
 }
