@@ -31,11 +31,11 @@ namespace WPF
                 newSelectNumber = 1;
                 this.textBox1.Text += newSelectNumber.ToString();
             }
-            else 
-            { 
-            selectNumber = 1;
-            
-            this.textBox1.Text += selectNumber.ToString();
+            else
+            {
+                selectNumber = 1;
+
+                this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
 
@@ -51,7 +51,7 @@ namespace WPF
             else
             {
                 selectNumber = 2;
-                
+
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
@@ -67,7 +67,7 @@ namespace WPF
             else
             {
                 selectNumber = 3;
-                
+
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
@@ -83,7 +83,7 @@ namespace WPF
             else
             {
                 selectNumber = 4;
-                
+
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
@@ -98,7 +98,7 @@ namespace WPF
             else
             {
                 selectNumber = 5;
-                
+
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
@@ -114,7 +114,7 @@ namespace WPF
             else
             {
                 selectNumber = 6;
-               
+
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
@@ -129,7 +129,7 @@ namespace WPF
             else
             {
                 selectNumber = 7;
-                
+
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
@@ -180,30 +180,39 @@ namespace WPF
         }
         private void btnCalculate_Click(object sender, EventArgs e)
         {
+            double temp=0;
             if (waitingNewNumber)
             {
-                switch(selectOperation){
+                switch (selectOperation)
+                {
                     case 0:
                         //Minus
                         newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1));
-                        this.textBox1.Text = Convert.ToString(selectNumber - newSelectNumber);
+                        selectNumber = temp;
+                        this.textBox1.Text = Convert.ToString(temp);
                         break;
                     case 1:
                         //Divide
                         newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('/') + 1));
-                        this.textBox1.Text = Convert.ToString(selectNumber / newSelectNumber);
+                        temp = selectNumber / newSelectNumber;
+                        this.textBox1.Text = Convert.ToString(temp);
                         break;
                     case 2:
                         //Plus
                         newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('+') + 1));
-                        this.textBox1.Text = Convert.ToString(selectNumber + newSelectNumber);
+                        temp = selectNumber + newSelectNumber;
+                        this.textBox1.Text = Convert.ToString(temp);
                         break;
                     case 3:
                         //Multi
                         newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('x') + 1));
-                        this.textBox1.Text = Convert.ToString(selectNumber * newSelectNumber);
+                        temp = selectNumber * newSelectNumber;
+                        this.textBox1.Text = Convert.ToString(temp);
                         break;
                 }
+                selectNumber = temp;
+                waitingNewNumber = false;
+                checkZero = false;
             }
             else
             {
@@ -218,7 +227,7 @@ namespace WPF
             if (errored)
             {
                 this.label2.Visible = false;
-                errored = false; 
+                errored = false;
             }
 
         }
@@ -251,7 +260,7 @@ namespace WPF
                 this.label2.Visible = true;
                 errored = true;
             }
-            
+
         }
         private void btnSum_Click(object sender, EventArgs e)
         {
@@ -283,6 +292,10 @@ namespace WPF
                 errored = true;
             }
         }
-        
+
+        private void btnDecimal_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
