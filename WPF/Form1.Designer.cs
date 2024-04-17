@@ -108,6 +108,7 @@
             btnDecimal.TabIndex = 5;
             btnDecimal.Text = ",";
             btnDecimal.UseVisualStyleBackColor = true;
+            btnDecimal.Click += btnDecimal_Click;
             // 
             // btnPlus
             // 
