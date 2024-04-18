@@ -210,15 +210,16 @@ namespace WPF
                         temp = selectNumber * newSelectNumber;
                         this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
                         break;
+                    default:
+                        selectNumber = Convert.ToDouble(this.textBox1.Text);
+                        break;
                 }
                 selectNumber = temp;
                 waitingNewNumber = false;
                 checkZero = false;
             }
-            else
-            {
-                this.textBox1.Text = Convert.ToString(selectNumber);
-            }
+             
+
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
