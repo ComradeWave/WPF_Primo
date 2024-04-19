@@ -348,70 +348,68 @@ namespace WPF
             if (isFirstThing)
             {
                 string tempOperation = string.Empty;
-                if (!doingDecimals)
+                
+                if (!waitingNewNumber)
                 {
-                    if (!waitingNewNumber)
+                    this.textBox1.Text += ',';
+                    doingDecimals = true;
+                    var temp = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf(',') + 1);
+                    double tempL = temp.Length;
+                    for (int i = 0; i < tempL; i++)
                     {
-                        this.textBox1.Text += ',';
-                        doingDecimals = true;
-                        var temp = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf(',') + 1);
-                        double tempL = temp.Length;
-                        for (int i = 0; i < tempL; i++)
-                        {
-                            selectNumber += temp[i] * Math.Pow(10, i--);
-                        }
-                    }
-                    else
-                    {
-                        string newOP1;
-                        string newOP2;
-                        double tempL = 0;
-                        switch (selectOperation)
-                        {
-                            case 0:
-                                newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1); //TEMP
-                                newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
-                                tempL = newOP2.Length;
-                                for (int i = 0; i < tempL; i++)
-                                {
-                                    selectNumber += newOP2[i] * Math.Pow(10, i--);
-                                }
-                                break;
-                            case 1:
-                                newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('/') + 1); //TEMP
-                                newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
-                                tempL = newOP2.Length;
-                                for (int i = 0; i < tempL; i++)
-                                {
-                                    selectNumber += newOP2[i] * Math.Pow(10, i--);
-                                }
-                                break;
-                            case 2:
-                                newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('+') + 1); //TEMP
-                                newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
-                                tempL = newOP2.Length;
-                                for (int i = 0; i < tempL; i++)
-                                {
-                                    selectNumber += newOP2[i] * Math.Pow(10, i--);
-                                }
-                                break;
-                            case 3:
-                                newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1); //TEMP
-                                newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
-                                tempL = newOP2.Length;
-                                for (int i = 0; i < tempL; i++)
-                                {
-                                    selectNumber += newOP2[i] * Math.Pow(10, i--);
-                                }
-                                break;
-                        }
+                        selectNumber += temp[i] * Math.Pow(10, i--);
                     }
                 }
                 else
                 {
-                    this.label2.Visible = true;
-                    errored = true;
-                }
+                    string newOP1;
+                    string newOP2;
+                    double tempL = 0;
+                    this.textBox1.Text += ',';
+                    short tempI;
+                    switch (selectOperation)
+                    {
+                        case 0:
+                            newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1); //TEMP
+                            newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
+                            tempL = newOP2.Length;
+                            for (int i = 0; i < tempL; i++)
+                            {
+                                selectNumber += newOP2[i] * Math.Pow(10, i--);
+                            }
+                        break;
+                        case 1:
+                            newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('/') + 1); //TEMP
+                            newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
+                            tempL = newOP2.Length;
+                            for (int i = 0; i < tempL; i++)
+                            {
+                                selectNumber += newOP2[i] * Math.Pow(10, i--);
+                            }
+                        break;
+                        case 2:
+                            newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('+') + 1); //TEMP
+                            newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
+                            tempL = newOP2.Length;
+                            for (int i = 0; i < tempL; i++)
+                            {
+                                tempI = (short)(i - 1);
+                                selectNumber += newOP2[i] * Math.Pow(10, tempI);
+                            }
+                        break;
+                        case 3:
+                            newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1); //TEMP
+                            newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
+                            tempL = newOP2.Length;
+                            for (int i = 0; i < tempL; i++)
+                            {
+                                selectNumber += newOP2[i] * Math.Pow(10, i--);
+                            }
+                            break;
+                        }
+                    }
+                
+                
             }
             else
             {
