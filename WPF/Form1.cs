@@ -11,6 +11,7 @@ namespace WPF
         private bool errored = false;
         private bool doingDecimals = false;
         private int selectOperation;
+        private bool isFirstThing = false;
 
 
 
@@ -39,6 +40,7 @@ namespace WPF
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
+            isFirstThing = true;
 
         }
 
@@ -56,6 +58,7 @@ namespace WPF
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
+            isFirstThing = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -72,6 +75,7 @@ namespace WPF
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
+            isFirstThing = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -88,6 +92,7 @@ namespace WPF
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
+            isFirstThing = true;
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -103,6 +108,7 @@ namespace WPF
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
+            isFirstThing = true;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -119,6 +125,7 @@ namespace WPF
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
+            isFirstThing = true;
         }
         private void button7_Click(object sender, EventArgs e)
         {
@@ -134,6 +141,7 @@ namespace WPF
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
+            isFirstThing = true;
         }
         private void button8_Click(object sender, EventArgs e)
         {
@@ -148,6 +156,7 @@ namespace WPF
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
+            isFirstThing = true;
         }
         private void button9_Click(object sender, EventArgs e)
         {
@@ -162,6 +171,7 @@ namespace WPF
                 this.textBox1.Text += selectNumber.ToString();
             }
             checkZero = true;
+            isFirstThing = true;
         }
         private void button0_Click(object sender, EventArgs e)
         {
@@ -177,6 +187,7 @@ namespace WPF
                     selectNumber = 0;
                     this.textBox1.Text += selectNumber.ToString();
                 }
+                isFirstThing = true;
             }
         }
         private void btnCalculate_Click(object sender, EventArgs e)
@@ -236,13 +247,21 @@ namespace WPF
         }
         private void btnMinus_Click(object sender, EventArgs e)
         {
-            if (!waitingNewNumber)
+            if (isFirstThing)
             {
-                this.selectNumber = Convert.ToDouble(this.textBox1.Text);
-                this.textBox1.Text += "-";
-                waitingNewNumber = true;
-                checkZero=false;
-                selectOperation = 0;
+                if (!waitingNewNumber)
+                {
+                    this.selectNumber = Convert.ToDouble(this.textBox1.Text);
+                    this.textBox1.Text += "-";
+                    waitingNewNumber = true;
+                    checkZero = false;
+                    selectOperation = 0;
+                }
+                else
+                {
+                    this.label2.Visible = true;
+                    errored = true;
+                }
             }
             else
             {
@@ -252,13 +271,21 @@ namespace WPF
         }
         private void btnDivide_Click(object sender, EventArgs e)
         {
-            if (!waitingNewNumber)
+            if (isFirstThing)
             {
-                this.selectNumber = Convert.ToDouble(this.textBox1.Text);
-                this.textBox1.Text += "/";
-                waitingNewNumber = true;
-                checkZero=false;
-                selectOperation = 1;
+                if (!waitingNewNumber)
+                {
+                    this.selectNumber = Convert.ToDouble(this.textBox1.Text);
+                    this.textBox1.Text += "/";
+                    waitingNewNumber = true;
+                    checkZero = false;
+                    selectOperation = 1;
+                }
+                else
+                {
+                    this.label2.Visible = true;
+                    errored = true;
+                }
             }
             else
             {
@@ -269,15 +296,23 @@ namespace WPF
         }
         private void btnSum_Click(object sender, EventArgs e)
         {
-            if (!waitingNewNumber)
+            if (isFirstThing)
             {
-                this.selectNumber = Convert.ToDouble(this.textBox1.Text);
-                this.textBox1.Text += "+";
-                waitingNewNumber = true;
-                checkZero=false;
-                selectOperation = 2;
+                if (!waitingNewNumber)
+                {
+                    this.selectNumber = Convert.ToDouble(this.textBox1.Text);
+                    this.textBox1.Text += "+";
+                    waitingNewNumber = true;
+                    checkZero = false;
+                    selectOperation = 2;
+                }
+                else
+                {
+                    this.label2.Visible = true;
+                    errored = true;
+                }
             }
-            else
+            else 
             {
                 this.label2.Visible = true;
                 errored = true;
@@ -285,13 +320,21 @@ namespace WPF
         }
         private void btnMulti_Click(object sender, EventArgs e)
         {
-            if (!waitingNewNumber)
+            if (isFirstThing)
             {
-                this.selectNumber = Convert.ToDouble(this.textBox1.Text);
-                this.textBox1.Text += "x";
-                waitingNewNumber = true;
-                checkZero = false;
-                selectOperation = 3;
+                if (!waitingNewNumber)
+                {
+                    this.selectNumber = Convert.ToDouble(this.textBox1.Text);
+                    this.textBox1.Text += "x";
+                    waitingNewNumber = true;
+                    checkZero = false;
+                    selectOperation = 3;
+                }
+                else
+                {
+                    this.label2.Visible = true;
+                    errored = true;
+                }
             }
             else
             {
@@ -302,67 +345,75 @@ namespace WPF
 
         private void btnDecimal_Click(object sender, EventArgs e)
         {
-            string tempOperation = string.Empty;
-            if (!doingDecimals)
+            if (isFirstThing)
             {
-                if (!waitingNewNumber)
+                string tempOperation = string.Empty;
+                if (!doingDecimals)
                 {
-                    this.textBox1.Text += ',';
-                    doingDecimals = true;
-                    var temp = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf(',') + 1);
-                    double tempL = temp.Length;
-                    for (int i = 0; i < tempL; i++)
+                    if (!waitingNewNumber)
                     {
-                        selectNumber += temp[i] * Math.Pow(10, i--);
+                        this.textBox1.Text += ',';
+                        doingDecimals = true;
+                        var temp = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf(',') + 1);
+                        double tempL = temp.Length;
+                        for (int i = 0; i < tempL; i++)
+                        {
+                            selectNumber += temp[i] * Math.Pow(10, i--);
+                        }
+                    }
+                    else
+                    {
+                        string newOP1;
+                        string newOP2;
+                        double tempL = 0;
+                        switch (selectOperation)
+                        {
+                            case 0:
+                                newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1); //TEMP
+                                newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
+                                tempL = newOP2.Length;
+                                for (int i = 0; i < tempL; i++)
+                                {
+                                    selectNumber += newOP2[i] * Math.Pow(10, i--);
+                                }
+                                break;
+                            case 1:
+                                newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('/') + 1); //TEMP
+                                newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
+                                tempL = newOP2.Length;
+                                for (int i = 0; i < tempL; i++)
+                                {
+                                    selectNumber += newOP2[i] * Math.Pow(10, i--);
+                                }
+                                break;
+                            case 2:
+                                newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('+') + 1); //TEMP
+                                newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
+                                tempL = newOP2.Length;
+                                for (int i = 0; i < tempL; i++)
+                                {
+                                    selectNumber += newOP2[i] * Math.Pow(10, i--);
+                                }
+                                break;
+                            case 3:
+                                newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1); //TEMP
+                                newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
+                                tempL = newOP2.Length;
+                                for (int i = 0; i < tempL; i++)
+                                {
+                                    selectNumber += newOP2[i] * Math.Pow(10, i--);
+                                }
+                                break;
+                        }
                     }
                 }
                 else
                 {
-                    string newOP1;
-                    string newOP2;
-                    double tempL = 0;
-                    switch (selectOperation)
-                    {
-                        case 0:
-                            newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1); //TEMP
-                            newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
-                            tempL = newOP2.Length;
-                            for (int i = 0; i < tempL; i++)
-                            {
-                                selectNumber += newOP2[i] * Math.Pow(10, i--);
-                            }
-                            break;
-                        case 1:
-                            newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('/') + 1); //TEMP
-                            newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
-                            tempL = newOP2.Length;
-                            for (int i = 0; i < tempL; i++)
-                            {
-                                selectNumber += newOP2[i] * Math.Pow(10, i--);
-                            }
-                            break;
-                        case 2:
-                            newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('+') + 1); //TEMP
-                            newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
-                            tempL = newOP2.Length;
-                            for (int i = 0; i < tempL; i++)
-                            {
-                                selectNumber += newOP2[i] * Math.Pow(10, i--);
-                            }
-                            break;
-                        case 3:
-                            newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1); //TEMP
-                            newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
-                            tempL = newOP2.Length;
-                            for (int i = 0; i < tempL; i++)
-                            {
-                                selectNumber += newOP2[i] * Math.Pow(10, i--);
-                            }
-                            break;
-                    }
+                    this.label2.Visible = true;
+                    errored = true;
                 }
             }
-            else 
+            else
             {
                 this.label2.Visible = true;
                 errored = true;
