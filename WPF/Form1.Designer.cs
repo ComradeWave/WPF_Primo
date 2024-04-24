@@ -48,6 +48,9 @@
             btnCalculate = new Button();
             textBox1 = new TextBox();
             label2 = new Label();
+            button10 = new Button();
+            button12 = new Button();
+            labelM = new Label();
             SuspendLayout();
             // 
             // label1
@@ -249,11 +252,44 @@
             label2.Text = "Errore!";
             label2.Visible = false;
             // 
+            // button10
+            // 
+            button10.Location = new Point(315, 232);
+            button10.Name = "button10";
+            button10.Size = new Size(41, 40);
+            button10.TabIndex = 20;
+            button10.Text = "STO";
+            button10.UseVisualStyleBackColor = true;
+            button10.Click += btnSTO_Click;
+            // 
+            // button12
+            // 
+            button12.Location = new Point(362, 232);
+            button12.Name = "button12";
+            button12.Size = new Size(43, 40);
+            button12.TabIndex = 22;
+            button12.Text = "MEM";
+            button12.UseVisualStyleBackColor = true;
+            button12.Click += btnMEM_Click;
+            // 
+            // labelM
+            // 
+            labelM.AutoSize = true;
+            labelM.Location = new Point(455, 107);
+            labelM.Name = "labelM";
+            labelM.Size = new Size(18, 15);
+            labelM.TabIndex = 23;
+            labelM.Text = "M";
+            labelM.Visible = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(511, 450);
+            Controls.Add(labelM);
+            Controls.Add(button12);
+            Controls.Add(button10);
             Controls.Add(label2);
             Controls.Add(textBox1);
             Controls.Add(btnCalculate);
@@ -302,5 +338,8 @@
         private Button btnCalculate;
         private TextBox textBox1;
         private Label label2;
+        private Button button10;
+        private Button button12;
+        private Label labelM;
     }
 }

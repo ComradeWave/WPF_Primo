@@ -12,7 +12,7 @@ namespace WPF
         private bool doingDecimals = false;
         private int selectOperation;
         private bool isFirstThing = false;
-
+        private double memory;
 
 
         //OPERATIONS
@@ -192,7 +192,7 @@ namespace WPF
         }
         private void btnCalculate_Click(object sender, EventArgs e)
         {
-            double temp=0;
+            double temp = 0;
             if (waitingNewNumber)
             {
                 switch (selectOperation)
@@ -216,7 +216,7 @@ namespace WPF
                             temp = selectNumber / newSelectNumber;
                             this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
                         }
-                       
+
                         break;
                     case 2:
                         //Plus
@@ -238,7 +238,7 @@ namespace WPF
                 waitingNewNumber = false;
                 checkZero = false;
             }
-             
+
 
         }
         private void btnDelete_Click(object sender, EventArgs e)
@@ -247,6 +247,8 @@ namespace WPF
             waitingNewNumber = false;
             checkZero = false;
             doingDecimals = false;
+            memory = 0;
+            this.labelM.Visible = false;
             if (errored)
             {
                 this.label2.Visible = false;
@@ -321,7 +323,7 @@ namespace WPF
                     errored = true;
                 }
             }
-            else 
+            else
             {
                 this.label2.Visible = true;
                 errored = true;
@@ -357,7 +359,7 @@ namespace WPF
             if (isFirstThing)
             {
                 string tempOperation = string.Empty;
-                
+
                 if (!waitingNewNumber)
                 {
                     this.textBox1.Text += ',';
@@ -386,7 +388,7 @@ namespace WPF
                             {
                                 selectNumber += newOP2[i] * Math.Pow(10, i--);
                             }
-                        break;
+                            break;
                         case 1:
                             newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('/') + 1); //TEMP
                             newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
@@ -395,7 +397,7 @@ namespace WPF
                             {
                                 selectNumber += newOP2[i] * Math.Pow(10, i--);
                             }
-                        break;
+                            break;
                         case 2:
                             newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('+') + 1); //TEMP
                             newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
@@ -405,7 +407,7 @@ namespace WPF
                                 tempI = (short)(i - 1);
                                 selectNumber += newOP2[i] * Math.Pow(10, tempI);
                             }
-                        break;
+                            break;
                         case 3:
                             newOP1 = this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1); //TEMP
                             newOP2 = newOP1.Substring(newOP1.LastIndexOf(',') + 1);
@@ -415,15 +417,52 @@ namespace WPF
                                 selectNumber += newOP2[i] * Math.Pow(10, i--);
                             }
                             break;
-                        }
                     }
-                
-                
+                }
+
+
             }
             else
             {
                 this.label2.Visible = true;
                 errored = true;
+            }
+        }
+
+        private void btnSTO_Click(object sender, EventArgs e)
+        {
+            if (!waitingNewNumber)
+            {
+                if (selectNumber != 0)
+                {
+                    memory = Convert.ToDouble(this.textBox1.Text);
+                    this.labelM.Visible = true;
+                    this.textBox1.Text = String.Empty;
+                }
+                else
+                {
+                    this.label2.Visible = true;
+                    errored = true;
+                }
+            }
+            else
+            {
+                this.label2.Visible = true;
+                errored = true;
+            }
+        }
+
+        private void btnMEM_Click(object sender, EventArgs e)
+        {
+            if (waitingNewNumber)
+            {
+                newSelectNumber = memory;
+                this.textBox1.Text += Convert.ToString(newSelectNumber);
+            }
+            else
+            {
+                selectNumber = memory;
+                this.textBox1.Text += Convert.ToString(newSelectNumber);
             }
         }
     }
