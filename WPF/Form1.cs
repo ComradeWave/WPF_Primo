@@ -12,7 +12,7 @@ namespace WPF
         private bool doingDecimals = false;
         private int selectOperation;
         private bool isFirstThing = false;
-
+        private double memory;
 
 
         //OPERATIONS
@@ -216,7 +216,7 @@ namespace WPF
                             temp = selectNumber / newSelectNumber;
                             this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
                         }
-                       
+
                         break;
                     case 2:
                         //Plus
@@ -429,13 +429,39 @@ namespace WPF
 
         private void btnSTO_Click(object sender, EventArgs e)
         {
-
+            if (!waitingNewNumber)
+            {
+                if (selectNumber != 0)
+                {
+                    memory = Convert.ToDouble(this.textBox1.Text);
+                    this.labelM.Visible = true;
+                    this.textBox1.Text = String.Empty;
+                }
+                else
+                {
+                    this.label2.Visible = true;
+                    errored = true;
+                }
+            }
+            else
+            {
+                this.label2.Visible = true;
+                errored = true;
+            }
         }
 
         private void btnMEM_Click(object sender, EventArgs e)
         {
-
-
+            if (waitingNewNumber)
+            {
+                newSelectNumber = memory;
+                this.textBox1.Text += Convert.ToString(newSelectNumber);
+            }
+            else
+            {
+                selectNumber = memory;
+                this.textBox1.Text += Convert.ToString(newSelectNumber);
+            }
         }
     }
 }
