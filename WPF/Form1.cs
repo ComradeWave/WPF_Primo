@@ -482,7 +482,7 @@ namespace WPF
                 else
                 {
                     selectNumber = memory;
-                    this.textBox1.Text += Convert.ToString(newSelectNumber);
+                    this.textBox1.Text += Convert.ToString(selectNumber);
                 }
             }
             else
