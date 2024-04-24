@@ -457,7 +457,12 @@ namespace WPF
         {
             if (!waitingNewNumber)
             {
-
+                memory += Convert.ToDouble(this.textBox1.Text);
+                if(memory == 0)
+                {
+                    this.labelM.Visible = false;
+                }
+                this.textBox1.Text = Convert.ToString(memory);
             }
         }
         private void throwErrorInCalc()
