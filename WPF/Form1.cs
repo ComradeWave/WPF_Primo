@@ -277,8 +277,6 @@ namespace WPF
             waitingNewNumber = false;
             checkZero = false;
             doingDecimals = false;
-            memory = 0;
-            this.labelM.Visible = false;
             if (errored)
             {
                 this.label2.Visible = false;
