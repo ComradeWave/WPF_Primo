@@ -441,28 +441,42 @@ namespace WPF
 
         private void btnMEM_Click(object sender, EventArgs e)
         {
-            if (waitingNewNumber)
+            if (memory != 0)
             {
-                newSelectNumber = memory;
-                this.textBox1.Text += Convert.ToString(newSelectNumber);
+                if (waitingNewNumber)
+                {
+                    newSelectNumber = memory;
+                    this.textBox1.Text += Convert.ToString(newSelectNumber);
+                }
+                else
+                {
+                    selectNumber = memory;
+                    this.textBox1.Text += Convert.ToString(newSelectNumber);
+                }
             }
             else
             {
-                selectNumber = memory;
-                this.textBox1.Text += Convert.ToString(newSelectNumber);
+                throwErrorInCalc();
             }
         }
 
         private void btnMPlus_Click(object sender, EventArgs e)
         {
-            if (!waitingNewNumber)
+            if (isFirstThing)
             {
-                memory += Convert.ToDouble(this.textBox1.Text);
-                if(memory == 0)
+                if (!waitingNewNumber)
                 {
-                    this.labelM.Visible = false;
+                    memory += Convert.ToDouble(this.textBox1.Text);
+                    if (memory == 0)
+                    {
+                        this.labelM.Visible = false;
+                    }
+                    this.textBox1.Text = Convert.ToString(memory);
                 }
-                this.textBox1.Text = Convert.ToString(memory);
+            }
+            else
+            {
+                throwErrorInCalc();
             }
         }
         private void throwErrorInCalc()
