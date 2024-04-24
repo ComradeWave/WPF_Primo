@@ -207,8 +207,7 @@ namespace WPF
                         //Divide
                         if (newSelectNumber == 0)
                         {
-                            this.label2.Visible = true;
-                            errored = true;
+                            throwErrorInCalc();
                         }
                         else
                         {
@@ -265,19 +264,17 @@ namespace WPF
                     this.selectNumber = Convert.ToDouble(this.textBox1.Text);
                     this.textBox1.Text += "-";
                     waitingNewNumber = true;
-                    
+
                     selectOperation = 0;
                 }
                 else
                 {
-                    this.label2.Visible = true;
-                    errored = true;
+                    throwErrorInCalc();
                 }
             }
             else
             {
-                this.label2.Visible = true;
-                errored = true;
+                throwErrorInCalc();
             }
         }
         private void btnDivide_Click(object sender, EventArgs e)
@@ -289,19 +286,17 @@ namespace WPF
                     this.selectNumber = Convert.ToDouble(this.textBox1.Text);
                     this.textBox1.Text += "/";
                     waitingNewNumber = true;
-                    
+
                     selectOperation = 1;
                 }
                 else
                 {
-                    this.label2.Visible = true;
-                    errored = true;
+                    throwErrorInCalc();
                 }
             }
             else
             {
-                this.label2.Visible = true;
-                errored = true;
+                throwErrorInCalc();
             }
 
         }
@@ -314,19 +309,17 @@ namespace WPF
                     this.selectNumber = Convert.ToDouble(this.textBox1.Text);
                     this.textBox1.Text += "+";
                     waitingNewNumber = true;
-                    
+
                     selectOperation = 2;
                 }
                 else
                 {
-                    this.label2.Visible = true;
-                    errored = true;
+                    throwErrorInCalc();
                 }
             }
             else
             {
-                this.label2.Visible = true;
-                errored = true;
+                throwErrorInCalc();
             }
         }
         private void btnMulti_Click(object sender, EventArgs e)
@@ -338,19 +331,16 @@ namespace WPF
                     this.selectNumber = Convert.ToDouble(this.textBox1.Text);
                     this.textBox1.Text += "x";
                     waitingNewNumber = true;
-                    
                     selectOperation = 3;
                 }
                 else
                 {
-                    this.label2.Visible = true;
-                    errored = true;
+                    throwErrorInCalc();
                 }
             }
             else
             {
-                this.label2.Visible = true;
-                errored = true;
+                throwErrorInCalc();
             }
         }
 
@@ -424,8 +414,7 @@ namespace WPF
             }
             else
             {
-                this.label2.Visible = true;
-                errored = true;
+                throwErrorInCalc();
             }
         }
 
@@ -441,29 +430,59 @@ namespace WPF
                 }
                 else
                 {
-                    this.label2.Visible = true;
-                    errored = true;
+                    throwErrorInCalc();
                 }
             }
             else
             {
-                this.label2.Visible = true;
-                errored = true;
+                throwErrorInCalc();
             }
         }
 
         private void btnMEM_Click(object sender, EventArgs e)
         {
-            if (waitingNewNumber)
+            if (memory != 0)
             {
-                newSelectNumber = memory;
-                this.textBox1.Text += Convert.ToString(newSelectNumber);
+                if (waitingNewNumber)
+                {
+                    newSelectNumber = memory;
+                    this.textBox1.Text += Convert.ToString(newSelectNumber);
+                }
+                else
+                {
+                    selectNumber = memory;
+                    this.textBox1.Text += Convert.ToString(newSelectNumber);
+                }
             }
             else
             {
-                selectNumber = memory;
-                this.textBox1.Text += Convert.ToString(newSelectNumber);
+                throwErrorInCalc();
             }
+        }
+
+        private void btnMPlus_Click(object sender, EventArgs e)
+        {
+            if (isFirstThing)
+            {
+                if (!waitingNewNumber)
+                {
+                    memory += Convert.ToDouble(this.textBox1.Text);
+                    if (memory == 0)
+                    {
+                        this.labelM.Visible = false;
+                    }
+                    this.textBox1.Text = Convert.ToString(memory);
+                }
+            }
+            else
+            {
+                throwErrorInCalc();
+            }
+        }
+        private void throwErrorInCalc()
+        {
+            this.label2.Visible = true;
+            errored = true;
         }
     }
 }
