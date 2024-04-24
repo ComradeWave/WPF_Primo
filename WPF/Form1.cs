@@ -199,35 +199,66 @@ namespace WPF
                 {
                     case 0:
                         //Minus
-                        newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1));
-                        temp = selectNumber - newSelectNumber;
-                        this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
-                        break;
-                    case 1:
-                        //Divide
-                        if (newSelectNumber == 0)
+                        try
+                        {
+                            newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('-') + 1));
+                            temp = selectNumber - newSelectNumber;
+                            this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
+                        }
+                        catch (Exception oopsie)
                         {
                             throwErrorInCalc();
                         }
-                        else
+                        
+                        break;
+                    case 1:
+                        //Divide
+                        try
                         {
-                            newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('/') + 1));
-                            temp = selectNumber / newSelectNumber;
-                            this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
+                            if (newSelectNumber == 0)
+                            {
+                                throwErrorInCalc();
+                            }
+                            else
+                            {
+                                newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('/') + 1));
+                                temp = selectNumber / newSelectNumber;
+                                this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
+                            }
+                        }
+                        catch (Exception oospie)
+                        {
+                            throwErrorInCalc();
                         }
 
                         break;
                     case 2:
                         //Plus
-                        newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('+') + 1));
-                        temp = selectNumber + newSelectNumber;
-                        this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
+                        try
+                        {
+                            newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('+') + 1));
+                            temp = selectNumber + newSelectNumber;
+                            this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
+                        }
+                        catch (Exception oopsie)
+                        {
+                            throwErrorInCalc();
+                        }
+                        
                         break;
                     case 3:
                         //Multi
-                        newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('x') + 1));
-                        temp = selectNumber * newSelectNumber;
-                        this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
+                        try
+                        {
+                            newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('x') + 1));
+                            temp = selectNumber * newSelectNumber;
+                            this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
+                        }
+                        catch(Exception oopsie)
+                        {
+                            throwErrorInCalc();
+                        }
+                        
                         break;
                     default:
                         selectNumber = Convert.ToDouble(this.textBox1.Text);
