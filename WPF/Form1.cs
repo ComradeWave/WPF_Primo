@@ -205,9 +205,18 @@ namespace WPF
                         break;
                     case 1:
                         //Divide
-                        newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('/') + 1));
-                        temp = selectNumber / newSelectNumber;
-                        this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
+                        if (newSelectNumber == 0)
+                        {
+                            this.label2.Visible = true;
+                            errored = true;
+                        }
+                        else
+                        {
+                            newSelectNumber = Convert.ToDouble(this.textBox1.Text.Substring(this.textBox1.Text.LastIndexOf('/') + 1));
+                            temp = selectNumber / newSelectNumber;
+                            this.textBox1.Text = Convert.ToString(Math.Round(temp, 3));
+                        }
+                       
                         break;
                     case 2:
                         //Plus
