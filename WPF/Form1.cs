@@ -207,8 +207,7 @@ namespace WPF
                         //Divide
                         if (newSelectNumber == 0)
                         {
-                            this.label2.Visible = true;
-                            errored = true;
+                            throwErrorInCalc();
                         }
                         else
                         {
@@ -270,14 +269,12 @@ namespace WPF
                 }
                 else
                 {
-                    this.label2.Visible = true;
-                    errored = true;
+                    throwErrorInCalc();
                 }
             }
             else
             {
-                this.label2.Visible = true;
-                errored = true;
+                throwErrorInCalc();
             }
         }
         private void btnDivide_Click(object sender, EventArgs e)
@@ -294,14 +291,12 @@ namespace WPF
                 }
                 else
                 {
-                    this.label2.Visible = true;
-                    errored = true;
+                    throwErrorInCalc();
                 }
             }
             else
             {
-                this.label2.Visible = true;
-                errored = true;
+                throwErrorInCalc();
             }
 
         }
@@ -319,14 +314,12 @@ namespace WPF
                 }
                 else
                 {
-                    this.label2.Visible = true;
-                    errored = true;
+                    throwErrorInCalc();
                 }
             }
             else
             {
-                this.label2.Visible = true;
-                errored = true;
+                throwErrorInCalc();
             }
         }
         private void btnMulti_Click(object sender, EventArgs e)
@@ -338,19 +331,16 @@ namespace WPF
                     this.selectNumber = Convert.ToDouble(this.textBox1.Text);
                     this.textBox1.Text += "x";
                     waitingNewNumber = true;
-
                     selectOperation = 3;
                 }
                 else
                 {
-                    this.label2.Visible = true;
-                    errored = true;
+                    throwErrorInCalc();
                 }
             }
             else
             {
-                this.label2.Visible = true;
-                errored = true;
+                throwErrorInCalc();
             }
         }
 
@@ -424,8 +414,7 @@ namespace WPF
             }
             else
             {
-                this.label2.Visible = true;
-                errored = true;
+                throwErrorInCalc();
             }
         }
 
@@ -441,14 +430,12 @@ namespace WPF
                 }
                 else
                 {
-                    this.label2.Visible = true;
-                    errored = true;
+                    throwErrorInCalc();
                 }
             }
             else
             {
-                this.label2.Visible = true;
-                errored = true;
+                throwErrorInCalc();
             }
         }
 
@@ -468,7 +455,15 @@ namespace WPF
 
         private void btnMPlus_Click(object sender, EventArgs e)
         {
+            if (!waitingNewNumber)
+            {
 
+            }
+        }
+        private void throwErrorInCalc()
+        {
+            this.label2.Visible = true;
+            errored = true;
         }
     }
 }
