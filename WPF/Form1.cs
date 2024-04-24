@@ -265,7 +265,7 @@ namespace WPF
                     this.selectNumber = Convert.ToDouble(this.textBox1.Text);
                     this.textBox1.Text += "-";
                     waitingNewNumber = true;
-                    
+
                     selectOperation = 0;
                 }
                 else
@@ -289,7 +289,7 @@ namespace WPF
                     this.selectNumber = Convert.ToDouble(this.textBox1.Text);
                     this.textBox1.Text += "/";
                     waitingNewNumber = true;
-                    
+
                     selectOperation = 1;
                 }
                 else
@@ -314,7 +314,7 @@ namespace WPF
                     this.selectNumber = Convert.ToDouble(this.textBox1.Text);
                     this.textBox1.Text += "+";
                     waitingNewNumber = true;
-                    
+
                     selectOperation = 2;
                 }
                 else
@@ -338,7 +338,7 @@ namespace WPF
                     this.selectNumber = Convert.ToDouble(this.textBox1.Text);
                     this.textBox1.Text += "x";
                     waitingNewNumber = true;
-                    
+
                     selectOperation = 3;
                 }
                 else
@@ -464,6 +464,11 @@ namespace WPF
                 selectNumber = memory;
                 this.textBox1.Text += Convert.ToString(newSelectNumber);
             }
+        }
+
+        private void btnMPlus_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

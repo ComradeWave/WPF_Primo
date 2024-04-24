@@ -51,6 +51,7 @@
             button10 = new Button();
             button12 = new Button();
             labelM = new Label();
+            btnMPlus = new Button();
             SuspendLayout();
             // 
             // label1
@@ -282,11 +283,22 @@
             labelM.Text = "M";
             labelM.Visible = false;
             // 
+            // btnMPlus
+            // 
+            btnMPlus.Location = new Point(411, 232);
+            btnMPlus.Name = "btnMPlus";
+            btnMPlus.Size = new Size(43, 40);
+            btnMPlus.TabIndex = 24;
+            btnMPlus.Text = "M+";
+            btnMPlus.UseVisualStyleBackColor = true;
+            btnMPlus.Click += btnMPlus_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(511, 450);
+            Controls.Add(btnMPlus);
             Controls.Add(labelM);
             Controls.Add(button12);
             Controls.Add(button10);
@@ -341,5 +353,6 @@
         private Button button10;
         private Button button12;
         private Label labelM;
+        private Button btnMPlus;
     }
 }
